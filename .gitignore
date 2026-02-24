@@ -1,0 +1,51 @@
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+*.iml
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Runner/GeneratedPluginRegistrant.*
+ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+*.mode1v3
+*.mode2v3
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.xcscmblueprint
+
+# Xcode
+DerivedData/
+*.ipa
+*.xcarchive
+
+# macOS
+macos/Flutter/GeneratedPluginRegistrant.swift
+
+# Hive local database files
+*.hive
+*.lock
+
+# Environment / secrets
+.env
+*.env
+lib/config/secrets.dart
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
