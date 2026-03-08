@@ -63,7 +63,7 @@ class _LogWorkoutForm extends StatefulWidget {
 
 class _LogWorkoutFormState extends State<_LogWorkoutForm> {
   String? _selectedType;
-  List<String> _selectedMuscles = [];
+  final List<String> _selectedMuscles = [];
   int _duration = 45;
   int _rpe = 6;
   double _avgHR = 140;
@@ -100,7 +100,8 @@ class _LogWorkoutFormState extends State<_LogWorkoutForm> {
               const SizedBox(height: 20),
 
               // Workout Type
-              const Text('Workout Type', style: TextStyle(fontWeight: FontWeight.w600)),
+              const Text('Workout Type',
+                  style: TextStyle(fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
@@ -113,7 +114,8 @@ class _LogWorkoutFormState extends State<_LogWorkoutForm> {
                     selectedColor: AppTheme.primaryBlue,
                     labelStyle: TextStyle(
                       color: selected ? Colors.white : null,
-                      fontWeight: selected ? FontWeight.w700 : FontWeight.normal,
+                      fontWeight:
+                          selected ? FontWeight.w700 : FontWeight.normal,
                     ),
                     onSelected: (_) => setState(() => _selectedType = type),
                   );
@@ -156,7 +158,8 @@ class _LogWorkoutFormState extends State<_LogWorkoutForm> {
               const SizedBox(height: 16),
 
               // Muscle Groups
-              const Text('Muscles Worked', style: TextStyle(fontWeight: FontWeight.w600)),
+              const Text('Muscles Worked',
+                  style: TextStyle(fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
@@ -169,7 +172,8 @@ class _LogWorkoutFormState extends State<_LogWorkoutForm> {
                     selectedColor: AppTheme.accentGreen,
                     labelStyle: TextStyle(
                       color: selected ? Colors.white : null,
-                      fontWeight: selected ? FontWeight.w700 : FontWeight.normal,
+                      fontWeight:
+                          selected ? FontWeight.w700 : FontWeight.normal,
                     ),
                     onSelected: (_) => setState(() {
                       selected
@@ -186,20 +190,22 @@ class _LogWorkoutFormState extends State<_LogWorkoutForm> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed:
-                      _selectedType == null || _isSaving ? null : () async {
-                    setState(() => _isSaving = true);
-                    await vm.logManualWorkout(
-                      workoutType: _selectedType!,
-                      durationMinutes: _duration,
-                      avgHeartRate: _avgHR,
-                      maxHeartRate: _avgHR + 20,
-                      calories: _duration * 8.5,
-                      muscleGroups: _selectedMuscles,
-                      perceivedExertion: _rpe,
-                    );
-                    if (mounted) Navigator.pop(context);
-                  },
+                  onPressed: _selectedType == null || _isSaving
+                      ? null
+                      : () async {
+                          setState(() => _isSaving = true);
+                          await vm.logManualWorkout(
+                            workoutType: _selectedType!,
+                            durationMinutes: _duration,
+                            avgHeartRate: _avgHR,
+                            maxHeartRate: _avgHR + 20,
+                            calories: _duration * 8.5,
+                            muscleGroups: _selectedMuscles,
+                            perceivedExertion: _rpe,
+                          );
+                          if (!context.mounted) return;
+                          Navigator.of(context).pop();
+                        },
                   child: _isSaving
                       ? const CupertinoActivityIndicator(color: Colors.white)
                       : const Text('Save Workout'),
@@ -243,8 +249,7 @@ class _SliderSection extends StatelessWidget {
             Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
             Text(displayValue,
                 style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: AppTheme.primaryBlue)),
+                    fontWeight: FontWeight.w700, color: AppTheme.primaryBlue)),
           ],
         ),
         Slider(
@@ -277,7 +282,7 @@ class _WorkoutTile extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: AppTheme.primaryBlue.withOpacity(0.12),
+                color: AppTheme.primaryBlue.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Icon(CupertinoIcons.flame_fill,
@@ -293,8 +298,7 @@ class _WorkoutTile extends StatelessWidget {
                           fontWeight: FontWeight.w700, fontSize: 15)),
                   Text(
                     '${session.durationMinutes} min · ${session.muscleGroupsWorked.join(", ")}',
-                    style: TextStyle(
-                        fontSize: 13, color: Colors.grey.shade500),
+                    style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -306,8 +310,7 @@ class _WorkoutTile extends StatelessWidget {
               children: [
                 Text(
                   'Fatigue',
-                  style: TextStyle(
-                      fontSize: 11, color: Colors.grey.shade500),
+                  style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
                 ),
                 Text(
                   '${session.fatigueScore.toStringAsFixed(0)}%',
@@ -347,8 +350,7 @@ class _EmptyState extends StatelessWidget {
           const Text('Log your first workout to start tracking recovery',
               style: TextStyle(color: Colors.grey)),
           const SizedBox(height: 24),
-          TextButton(
-              onPressed: onTap, child: const Text('Log Workout Now')),
+          TextButton(onPressed: onTap, child: const Text('Log Workout Now')),
         ],
       ),
     );

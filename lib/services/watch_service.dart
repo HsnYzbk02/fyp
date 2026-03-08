@@ -10,7 +10,7 @@ class WatchService {
   // In production, use wearable_communicator package which wraps WatchConnectivity
   // import 'package:wearable_communicator/wearable_communicator.dart';
 
-  bool _isWatchReachable = false;
+  final bool _isWatchReachable = false;
   bool get isWatchReachable => _isWatchReachable;
 
   final List<Function(Map<String, dynamic>)> _messageListeners = [];
@@ -80,6 +80,7 @@ class WatchService {
     _messageListeners.remove(listener);
   }
 
+  // ignore: unused_element
   void _handleIncomingMessage(Map<String, dynamic> message) {
     final type = message['type'] as String?;
     debugPrint('[WatchService] Received from Watch: $type');
@@ -112,7 +113,8 @@ class WatchService {
   }
 
   void _onWorkoutEnded(Map<String, dynamic> msg) {
-    debugPrint('[WatchService] Workout ended. Duration: ${msg['duration']} min');
+    debugPrint(
+        '[WatchService] Workout ended. Duration: ${msg['duration']} min');
   }
 
   void _onHeartRateUpdate(Map<String, dynamic> msg) {

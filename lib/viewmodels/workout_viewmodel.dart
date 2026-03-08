@@ -48,14 +48,36 @@ class WorkoutViewModel extends ChangeNotifier {
   }
 
   static const List<String> workoutTypes = [
-    'Running', 'Cycling', 'Swimming', 'Weightlifting', 'HIIT',
-    'CrossFit', 'Yoga', 'Pilates', 'Basketball', 'Football',
-    'Tennis', 'Boxing', 'Rock Climbing', 'Rowing', 'Jump Rope',
+    'Running',
+    'Cycling',
+    'Swimming',
+    'Weightlifting',
+    'HIIT',
+    'CrossFit',
+    'Yoga',
+    'Pilates',
+    'Basketball',
+    'Football',
+    'Tennis',
+    'Boxing',
+    'Rock Climbing',
+    'Rowing',
+    'Jump Rope',
   ];
 
   static const List<String> muscleGroups = [
-    'Chest', 'Back', 'Shoulders', 'Biceps', 'Triceps',
-    'Forearms', 'Core', 'Quads', 'Hamstrings', 'Glutes',
-    'Calves', 'Hip Flexors', 'Full Body',
+    'Chest',
+    'Back',
+    'Shoulders',
+    'Biceps',
+    'Triceps',
+    'Forearms',
+    'Core',
+    'Quads',
+    'Hamstrings',
+    'Glutes',
+    'Calves',
+    'Hip Flexors',
+    'Full Body',
   ];
 }

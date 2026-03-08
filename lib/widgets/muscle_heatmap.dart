@@ -27,7 +27,7 @@ class MuscleHeatmap extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -55,7 +55,7 @@ class MuscleHeatmap extends StatelessWidget {
                       child: LinearProgressIndicator(
                         value: entry.value / 100,
                         minHeight: 10,
-                        backgroundColor: color.withOpacity(0.12),
+                        backgroundColor: color.withValues(alpha: 0.12),
                         valueColor: AlwaysStoppedAnimation<Color>(color),
                       ),
                     ),
@@ -79,13 +79,13 @@ class MuscleHeatmap extends StatelessWidget {
           }),
           const SizedBox(height: 8),
           // Legend
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _LegendDot(color: AppTheme.recoveryLow, label: 'Fatigued'),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               _LegendDot(color: AppTheme.recoveryMid, label: 'Recovering'),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               _LegendDot(color: AppTheme.recoveryFull, label: 'Ready'),
             ],
           ),

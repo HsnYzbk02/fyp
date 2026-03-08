@@ -46,7 +46,8 @@ class ProfileScreen extends StatelessWidget {
                       // Avatar
                       CircleAvatar(
                         radius: 50,
-                        backgroundColor: AppTheme.primaryBlue.withOpacity(0.15),
+                        backgroundColor:
+                            AppTheme.primaryBlue.withValues(alpha: 0.15),
                         child: Text(
                           p.name.isNotEmpty ? p.name[0].toUpperCase() : '?',
                           style: const TextStyle(
@@ -75,8 +76,7 @@ class ProfileScreen extends StatelessWidget {
                               value: '${p.weightKg.toStringAsFixed(0)} kg'),
                           const SizedBox(width: 12),
                           _StatCard(
-                              label: 'BMI',
-                              value: p.bmi.toStringAsFixed(1)),
+                              label: 'BMI', value: p.bmi.toStringAsFixed(1)),
                         ],
                       ),
 
@@ -109,7 +109,8 @@ class ProfileScreen extends StatelessWidget {
 
                       _InfoSection(
                         title: 'Daily Water Target',
-                        content: '${(p.dailyWaterTargetMl / 1000).toStringAsFixed(1)} L',
+                        content:
+                            '${(p.dailyWaterTargetMl / 1000).toStringAsFixed(1)} L',
                       ),
                     ],
                   ),
@@ -155,11 +156,10 @@ class _StatCard extends StatelessWidget {
         child: Column(
           children: [
             Text(value,
-                style: const TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.w800)),
-            Text(label,
                 style:
-                    TextStyle(fontSize: 12, color: Colors.grey.shade500)),
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text(label,
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
           ],
         ),
       ),

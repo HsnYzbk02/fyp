@@ -17,9 +17,11 @@ import 'views/onboarding/onboarding_screen.dart';
 import 'views/home/main_nav_screen.dart';
 
 void main() async {
+  print('Starting main...');
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Hive local database
+  print('Initializing Hive...');
   await Hive.initFlutter();
   Hive.registerAdapter(WorkoutSessionAdapter());
   Hive.registerAdapter(RecoveryRecordAdapter());
@@ -28,10 +30,20 @@ void main() async {
   await Hive.openBox<RecoveryRecord>('recovery_records');
   await Hive.openBox<UserProfile>('user_profile');
   await Hive.openBox('settings');
+  print('Hive initialized');
 
   // Initialize services
+  print('Initializing NotificationService...');
   await NotificationService.instance.initialize();
+  print('NotificationService initialized');
 
+  // Set onboarding as complete for testing
+  print('Setting onboarding...');
+  final settingsBox = await Hive.openBox('settings');
+  await settingsBox.put('has_onboarded', true);
+  print('Onboarding set');
+
+  print('Running app...');
   runApp(const MuscleRecoveryApp());
 }
 
@@ -40,6 +52,7 @@ class MuscleRecoveryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('Building MuscleRecoveryApp...');
     return MultiProvider(
       providers: [
         Provider<HealthService>(create: (_) => HealthService()),
@@ -58,8 +71,8 @@ class MuscleRecoveryApp extends StatelessWidget {
       child: MaterialApp(
         title: 'MuscleRecovery AI',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.system,
         home: _LandingRouter(),
       ),
@@ -70,8 +83,20 @@ class MuscleRecoveryApp extends StatelessWidget {
 class _LandingRouter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final settings = Hive.box('settings');
-    final hasOnboarded = settings.get('has_onboarded', defaultValue: false);
-    return hasOnboarded ? const MainNavScreen() : const OnboardingScreen();
+    print('Building _LandingRouter...');
+    try {
+      final settings = Hive.box('settings');
+      // settings.put('has_onboarded', true); // Uncomment to force onboarding complete
+      final hasOnboarded = settings.get('has_onboarded', defaultValue: false);
+      print('hasOnboarded: $hasOnboarded');
+      return hasOnboarded ? const MainNavScreen() : const OnboardingScreen();
+    } catch (e) {
+      print('Error in _LandingRouter: $e');
+      return Scaffold(
+        body: Center(
+          child: Text('Error loading app: $e'),
+        ),
+      );
+    }
   }
 }

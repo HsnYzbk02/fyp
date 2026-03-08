@@ -146,14 +146,16 @@ Respond ONLY in this exact JSON format:
         {
           'category': 'Rest',
           'title': 'Take a Full Rest Day',
-          'description': 'Your body needs recovery. Avoid intense training today.',
+          'description':
+              'Your body needs recovery. Avoid intense training today.',
           'priority': 'high',
           'duration_minutes': 0,
         },
         {
           'category': 'Sleep',
           'title': 'Prioritize 8+ Hours Tonight',
-          'description': 'Sleep is your most powerful recovery tool. Aim for 8–9 hours.',
+          'description':
+              'Sleep is your most powerful recovery tool. Aim for 8–9 hours.',
           'priority': 'high',
           'duration_minutes': 480,
         },
@@ -163,7 +165,8 @@ Respond ONLY in this exact JSON format:
         {
           'category': 'Active Recovery',
           'title': '20-Min Light Walk or Yoga',
-          'description': 'Gentle movement increases blood flow to fatigued muscles.',
+          'description':
+              'Gentle movement increases blood flow to fatigued muscles.',
           'priority': 'medium',
           'duration_minutes': 20,
         },
@@ -179,7 +182,8 @@ Respond ONLY in this exact JSON format:
       recs.add({
         'category': 'Training',
         'title': 'You\'re Ready to Train!',
-        'description': 'Your recovery is excellent. A moderate-to-high intensity session is appropriate.',
+        'description':
+            'Your recovery is excellent. A moderate-to-high intensity session is appropriate.',
         'priority': 'low',
         'duration_minutes': 60,
       });
@@ -190,10 +194,15 @@ Respond ONLY in this exact JSON format:
           '${score >= 70 ? "You are well recovered." : score >= 40 ? "Moderate fatigue detected." : "High fatigue — rest is essential."}',
       recommendations: recs,
       muscleRecoveryEstimate: const {
-        'Chest': 75, 'Back': 70, 'Legs': 65,
-        'Shoulders': 80, 'Arms': 75, 'Core': 80,
+        'Chest': 75,
+        'Back': 70,
+        'Legs': 65,
+        'Shoulders': 80,
+        'Arms': 75,
+        'Core': 80,
       },
-      watchTip: score >= 70 ? 'Great recovery! Ready to train.' : 'Rest up today 💤',
+      watchTip:
+          score >= 70 ? 'Great recovery! Ready to train.' : 'Rest up today 💤',
     );
   }
 }
@@ -216,8 +225,10 @@ class RecoveryRecommendation {
   factory RecoveryRecommendation.fromJson(Map<String, dynamic> json) {
     return RecoveryRecommendation(
       summary: json['summary'] ?? '',
-      recommendations: List<Map<String, dynamic>>.from(json['recommendations'] ?? []),
-      muscleRecoveryEstimate: Map<String, dynamic>.from(json['muscle_recovery_estimate'] ?? {}),
+      recommendations:
+          List<Map<String, dynamic>>.from(json['recommendations'] ?? []),
+      muscleRecoveryEstimate:
+          Map<String, dynamic>.from(json['muscle_recovery_estimate'] ?? {}),
       watchTip: json['watch_tip'] ?? '',
       nextWorkoutSuggestion: json['next_workout_suggestion'],
     );

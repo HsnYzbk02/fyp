@@ -13,22 +13,17 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DashboardViewModel>(
-      builder: (context, vm, _) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('MuscleRecovery AI'),
-            actions: [
-              IconButton(
-                icon: const Icon(CupertinoIcons.refresh),
-                onPressed: vm.loadDashboard,
-              ),
-            ],
-          ),
-          body: vm.isLoading
-              ? const Center(child: CupertinoActivityIndicator())
-              : vm.errorMessage != null
-                  ? _ErrorState(message: vm.errorMessage!, onRetry: vm.loadDashboard)
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Dashboard'),
+      ),
+      body: const Center(
+        child: Text('Dashboard Screen'),
+      ),
+    );
+  }
+                  ? _ErrorState(
+                      message: vm.errorMessage!, onRetry: vm.loadDashboard)
                   : _DashboardContent(vm: vm),
         );
       },
@@ -62,7 +57,7 @@ class _DashboardContent extends StatelessWidget {
 
             // ── AI Summary ───────────────────────────────────────────────
             if (vm.todayRecommendation != null) ...[
-              _SectionHeader(title: "Today's Insight 🤖"),
+              const _SectionHeader(title: "Today's Insight 🤖"),
               const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.all(16),
@@ -87,7 +82,7 @@ class _DashboardContent extends StatelessWidget {
             ],
 
             // ── Biometric Metrics Grid ───────────────────────────────────
-            _SectionHeader(title: 'Apple Watch Metrics'),
+            const _SectionHeader(title: 'Apple Watch Metrics'),
             const SizedBox(height: 12),
             GridView.count(
               crossAxisCount: 2,
@@ -113,7 +108,11 @@ class _DashboardContent extends StatelessWidget {
                       ? '${vm.hrv!.toStringAsFixed(0)} ms'
                       : '-- ms',
                   subtitle: vm.hrv != null
-                      ? (vm.hrv! > 60 ? '✓ Good' : vm.hrv! > 40 ? 'Moderate' : 'Low')
+                      ? (vm.hrv! > 60
+                          ? '✓ Good'
+                          : vm.hrv! > 40
+                              ? 'Moderate'
+                              : 'Low')
                       : null,
                 ),
                 MetricCard(
@@ -131,7 +130,7 @@ class _DashboardContent extends StatelessWidget {
                   icon: CupertinoIcons.flame_fill,
                   iconColor: AppTheme.warningOrange,
                   label: 'Steps Today',
-                  value: '${_formatNumber(vm.todaySteps)}',
+                  value: _formatNumber(vm.todaySteps),
                 ),
               ],
             ),
@@ -140,7 +139,7 @@ class _DashboardContent extends StatelessWidget {
 
             // ── Muscle Heatmap ───────────────────────────────────────────
             if (vm.todayRecommendation != null) ...[
-              _SectionHeader(title: 'Muscle Recovery Status'),
+              const _SectionHeader(title: 'Muscle Recovery Status'),
               const SizedBox(height: 12),
               MuscleHeatmap(
                 muscleData: Map<String, double>.from(
@@ -154,7 +153,7 @@ class _DashboardContent extends StatelessWidget {
             // ── Recommendations ──────────────────────────────────────────
             if (vm.todayRecommendation != null &&
                 vm.todayRecommendation!.recommendations.isNotEmpty) ...[
-              _SectionHeader(title: 'Recovery Recommendations'),
+              const _SectionHeader(title: 'Recovery Recommendations'),
               const SizedBox(height: 12),
               ...vm.todayRecommendation!.recommendations
                   .take(4)

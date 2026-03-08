@@ -17,10 +17,12 @@ class UserProfile extends HiveObject {
   final double heightCm;
 
   @HiveField(4)
-  final String fitnessLevel; // "Beginner" | "Intermediate" | "Advanced" | "Athlete"
+  final String
+      fitnessLevel; // "Beginner" | "Intermediate" | "Advanced" | "Athlete"
 
   @HiveField(5)
-  final List<String> primaryGoals; // ["Build Muscle", "Lose Weight", "Improve Endurance"]
+  final List<String>
+      primaryGoals; // ["Build Muscle", "Lose Weight", "Improve Endurance"]
 
   @HiveField(6)
   final List<String> favoriteWorkouts;
@@ -92,44 +94,5 @@ class UserProfile extends HiveObject {
       notificationsEnabled: notificationsEnabled ?? this.notificationsEnabled,
       dailyWaterTargetMl: dailyWaterTargetMl ?? this.dailyWaterTargetMl,
     );
-  }
-}
-
-class UserProfileAdapter extends TypeAdapter<UserProfile> {
-  @override
-  final int typeId = 2;
-
-  @override
-  UserProfile read(BinaryReader reader) {
-    return UserProfile(
-      name: reader.read(),
-      age: reader.read(),
-      weightKg: reader.read(),
-      heightCm: reader.read(),
-      fitnessLevel: reader.read(),
-      primaryGoals: List<String>.from(reader.read()),
-      favoriteWorkouts: List<String>.from(reader.read()),
-      targetSleepHours: reader.read(),
-      hasAppleWatch: reader.read(),
-      appleWatchModel: reader.read(),
-      notificationsEnabled: reader.read(),
-      dailyWaterTargetMl: reader.read(),
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, UserProfile obj) {
-    writer.write(obj.name);
-    writer.write(obj.age);
-    writer.write(obj.weightKg);
-    writer.write(obj.heightCm);
-    writer.write(obj.fitnessLevel);
-    writer.write(obj.primaryGoals);
-    writer.write(obj.favoriteWorkouts);
-    writer.write(obj.targetSleepHours);
-    writer.write(obj.hasAppleWatch);
-    writer.write(obj.appleWatchModel);
-    writer.write(obj.notificationsEnabled);
-    writer.write(obj.dailyWaterTargetMl);
   }
 }

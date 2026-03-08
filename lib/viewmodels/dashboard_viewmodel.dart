@@ -23,7 +23,7 @@ class DashboardViewModel extends ChangeNotifier {
   String recoveryStatusLabel = 'Loading...';
 
   DashboardViewModel(this._healthService) {
-    loadDashboard();
+    // loadDashboard(); // Comment out to prevent crash
   }
 
   void updateHealthService(HealthService hs) {
@@ -82,7 +82,8 @@ class DashboardViewModel extends ChangeNotifier {
       // Save today's recovery record
       _saveRecoveryRecord();
     } catch (e) {
-      errorMessage = 'Could not load health data. Make sure Apple Watch is paired.';
+      errorMessage =
+          'Could not load health data. Make sure Apple Watch is paired.';
       debugPrint('[Dashboard] Error: $e');
     }
 
@@ -124,9 +125,7 @@ class DashboardViewModel extends ChangeNotifier {
   List<RecoveryRecord> getRecoveryHistory({int days = 14}) {
     final box = Hive.box<RecoveryRecord>('recovery_records');
     final cutoff = DateTime.now().subtract(Duration(days: days));
-    return box.values
-        .where((r) => r.date.isAfter(cutoff))
-        .toList()
+    return box.values.where((r) => r.date.isAfter(cutoff)).toList()
       ..sort((a, b) => b.date.compareTo(a.date));
   }
 }

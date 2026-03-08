@@ -38,14 +38,14 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // ── HRV History Chart ──────────────────────────────
-                      _SectionTitle('HRV History (14 days)'),
+                      const _SectionTitle('HRV History (14 days)'),
                       const SizedBox(height: 12),
-                      _HRVChart(scores: dvm.getRecoveryHistory()),
+                      _HRVChart(history: dvm.getRecoveryHistory()),
 
                       const SizedBox(height: 24),
 
                       // ── Muscle Heatmap ─────────────────────────────────
-                      _SectionTitle('Muscle Group Status'),
+                      const _SectionTitle('Muscle Group Status'),
                       const SizedBox(height: 12),
                       rvm.muscleRecovery.isNotEmpty
                           ? MuscleHeatmap(muscleData: rvm.muscleRecovery)
@@ -56,20 +56,21 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
                       // ── Next Workout Suggestion ────────────────────────
                       if (rvm.recommendation?.nextWorkoutSuggestion != null)
                         _NextWorkoutCard(
-                          suggestion: rvm.recommendation!.nextWorkoutSuggestion!,
+                          suggestion:
+                              rvm.recommendation!.nextWorkoutSuggestion!,
                         ),
 
                       const SizedBox(height: 24),
 
                       // ── All Recommendations ────────────────────────────
                       if (rvm.recommendation != null) ...[
-                        _SectionTitle('All Recommendations'),
+                        const _SectionTitle('All Recommendations'),
                         const SizedBox(height: 12),
-                        ...rvm.recommendation!.recommendations.map((r) =>
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: RecommendationCard(recommendation: r),
-                            )),
+                        ...rvm.recommendation!.recommendations
+                            .map((r) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 12),
+                                  child: RecommendationCard(recommendation: r),
+                                )),
                       ],
                     ],
                   ),
@@ -107,7 +108,8 @@ class _HRVChart extends StatelessWidget {
           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Text('No history yet', style: TextStyle(color: Colors.grey)),
+        child:
+            const Text('No history yet', style: TextStyle(color: Colors.grey)),
       );
     }
 
@@ -136,7 +138,7 @@ class _HRVChart extends StatelessWidget {
               dotData: const FlDotData(show: false),
               belowBarData: BarAreaData(
                 show: true,
-                color: AppTheme.primaryBlue.withOpacity(0.12),
+                color: AppTheme.primaryBlue.withValues(alpha: 0.12),
               ),
             ),
           ],
@@ -169,7 +171,7 @@ class _NextWorkoutCard extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [_intensityColor, _intensityColor.withOpacity(0.7)],
+          colors: [_intensityColor, _intensityColor.withValues(alpha: 0.7)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -198,13 +200,15 @@ class _NextWorkoutCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
               '${suggestion['intensity']?.toString().toUpperCase() ?? ''} INTENSITY',
               style: const TextStyle(
-                  color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700),
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700),
             ),
           ),
         ],

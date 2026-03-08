@@ -17,10 +17,10 @@ class _MainNavScreenState extends State<MainNavScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    const DashboardScreen(),
-    const RecoveryScreen(),
-    const WorkoutScreen(),
-    const ProfileScreen(),
+    const Center(child: Text('Dashboard')),
+    const Center(child: Text('Recovery')),
+    const Center(child: Text('Workout')),
+    const Center(child: Text('Profile')),
   ];
 
   @override
@@ -30,43 +30,27 @@ class _MainNavScreenState extends State<MainNavScreen> {
         index: _selectedIndex,
         children: _screens,
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 20,
-              offset: const Offset(0, -4),
-            ),
-          ],
-        ),
-        child: NavigationBar(
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: (i) => setState(() => _selectedIndex = i),
-          indicatorColor: AppTheme.primaryBlue.withOpacity(0.15),
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(CupertinoIcons.home),
-              selectedIcon: Icon(CupertinoIcons.house_fill),
-              label: 'Dashboard',
-            ),
-            NavigationDestination(
-              icon: Icon(CupertinoIcons.heart),
-              selectedIcon: Icon(CupertinoIcons.heart_fill),
-              label: 'Recovery',
-            ),
-            NavigationDestination(
-              icon: Icon(CupertinoIcons.flame),
-              selectedIcon: Icon(CupertinoIcons.flame_fill),
-              label: 'Workout',
-            ),
-            NavigationDestination(
-              icon: Icon(CupertinoIcons.person),
-              selectedIcon: Icon(CupertinoIcons.person_fill),
-              label: 'Profile',
-            ),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: (i) => setState(() => _selectedIndex = i),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.healing),
+            label: 'Recovery',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center),
+            label: 'Workout',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }

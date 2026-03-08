@@ -35,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       title: 'AI-Powered Insights',
       subtitle:
           'Our AI analyzes your biometrics and tells you exactly when to train, rest, stretch, or hydrate.',
-      color: const Color(0xFF9B59B6),
+      color: Color(0xFF9B59B6),
     ),
     _OnboardingPage(
       emoji: '🏃',
@@ -147,7 +147,7 @@ class _OnboardingPage extends StatelessWidget {
             width: 120,
             height: 120,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.12),
+              color: color.withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
             child: Center(
@@ -163,8 +163,8 @@ class _OnboardingPage extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             subtitle,
-            style: const TextStyle(
-                fontSize: 16, color: Colors.grey, height: 1.6),
+            style:
+                const TextStyle(fontSize: 16, color: Colors.grey, height: 1.6),
             textAlign: TextAlign.center,
           ),
         ],

@@ -20,7 +20,6 @@ class AppTheme {
         colorScheme: ColorScheme.fromSeed(
           seedColor: primaryBlue,
           brightness: Brightness.light,
-          background: backgroundLight,
           surface: cardLight,
         ),
         scaffoldBackgroundColor: backgroundLight,
@@ -36,18 +35,21 @@ class AppTheme {
           ),
           iconTheme: IconThemeData(color: Color(0xFF1A1A2E)),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 0,
           color: cardLight,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryBlue,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-            textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            textStyle:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
       );
@@ -57,7 +59,6 @@ class AppTheme {
         colorScheme: ColorScheme.fromSeed(
           seedColor: primaryBlue,
           brightness: Brightness.dark,
-          background: backgroundDark,
           surface: cardDark,
         ),
         scaffoldBackgroundColor: backgroundDark,
@@ -73,18 +74,21 @@ class AppTheme {
           ),
           iconTheme: IconThemeData(color: Colors.white),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 0,
           color: cardDark,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryBlue,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-            textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            textStyle:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
       );

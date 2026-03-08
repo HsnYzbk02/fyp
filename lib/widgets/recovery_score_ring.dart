@@ -41,7 +41,8 @@ class _RecoveryScoreRingState extends State<RecoveryScoreRing>
       _animation = Tween<double>(
         begin: oldWidget.score / 100,
         end: widget.score / 100,
-      ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
+      ).animate(
+          CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
       _controller
         ..reset()
         ..forward();
@@ -77,14 +78,20 @@ class _RecoveryScoreRingState extends State<RecoveryScoreRing>
                 painter: _RingPainter(
                   progress: _animation.value,
                   color: _ringColor,
-                  backgroundColor: _ringColor.withOpacity(0.12),
+                  backgroundColor: _ringColor.withValues(alpha: 0.12),
                 ),
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '${(widget.score * _animation.value / (widget.score / 100)).clamp(0, 100).toStringAsFixed(0)}',
+                    (widget.score == 0
+                            ? 0
+                            : (widget.score *
+                                    _animation.value /
+                                    (widget.score / 100))
+                                .clamp(0, 100))
+                        .toStringAsFixed(0),
                     style: const TextStyle(
                       fontSize: 58,
                       fontWeight: FontWeight.w800,
@@ -97,10 +104,10 @@ class _RecoveryScoreRingState extends State<RecoveryScoreRing>
                   ),
                   const SizedBox(height: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     decoration: BoxDecoration(
-                      color: _ringColor.withOpacity(0.15),
+                      color: _ringColor.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
@@ -164,7 +171,7 @@ class _RingPainter extends CustomPainter {
           ..shader = SweepGradient(
             startAngle: startAngle,
             endAngle: startAngle + 2 * pi * progress,
-            colors: [color.withOpacity(0.7), color],
+            colors: [color.withValues(alpha: 0.7), color],
           ).createShader(Rect.fromCircle(center: center, radius: radius))
           ..strokeWidth = strokeWidth
           ..style = PaintingStyle.stroke

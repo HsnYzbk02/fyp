@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class HealthService {
   final Health _health = Health();
 
-  static const List<HealthDataType> _readTypes = [
+  static final List<HealthDataType> _readTypes = [
     HealthDataType.HEART_RATE,
     HealthDataType.HEART_RATE_VARIABILITY_SDNN, // Key metric from Apple Watch
     HealthDataType.RESTING_HEART_RATE,
@@ -16,7 +16,6 @@ class HealthService {
     HealthDataType.STEPS,
     HealthDataType.ACTIVE_ENERGY_BURNED,
     HealthDataType.WORKOUT,
-    HealthDataType.VO2MAX,
     HealthDataType.BLOOD_OXYGEN,
     HealthDataType.BODY_TEMPERATURE,
     HealthDataType.WATER,
@@ -83,7 +82,8 @@ class HealthService {
     double remMinutes = 0;
 
     for (final point in data) {
-      final minutes = point.dateTo.difference(point.dateFrom).inMinutes.toDouble();
+      final minutes =
+          point.dateTo.difference(point.dateFrom).inMinutes.toDouble();
       if (point.type == HealthDataType.SLEEP_ASLEEP) totalMinutes += minutes;
       if (point.type == HealthDataType.SLEEP_DEEP) deepMinutes += minutes;
       if (point.type == HealthDataType.SLEEP_REM) remMinutes += minutes;
@@ -125,10 +125,6 @@ class HealthService {
     final midnight = DateTime(now.year, now.month, now.day);
     final steps = await _health.getTotalStepsInInterval(midnight, now);
     return steps ?? 0;
-  }
-
-  Future<double?> getVO2Max() async {
-    return _getLatestDoubleValue(HealthDataType.VO2MAX);
   }
 
   Future<double?> getBloodOxygen() async {
