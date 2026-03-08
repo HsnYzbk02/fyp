@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../models/workout_session.dart';
-import '../models/recovery_record.dart';
 
 /// AIRecommendationService generates personalized muscle recovery advice
 /// by feeding HealthKit biometrics and workout history to an LLM.

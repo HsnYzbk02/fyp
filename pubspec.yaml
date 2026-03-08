@@ -17,7 +17,7 @@ dependencies:
   # Health & Sensors
   health: ^10.2.0                    # HealthKit (iOS) - Heart rate, HRV, steps, sleep
   sensors_plus: ^5.0.1               # Accelerometer / Gyroscope
-  wearable_communicator: ^0.0.3      # Apple Watch <-> iPhone communication
+  # wearable_communicator: ^0.0.3      # Apple Watch <-> iPhone communication
 
   # UI & Animations
   cupertino_icons: ^1.0.6
